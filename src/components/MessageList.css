@@ -1,0 +1,8 @@
+.card-title{
+   position: relative;
+   > span {
+      position: absolute;
+      right: 0;
+      top: 0;
+   }
+}
