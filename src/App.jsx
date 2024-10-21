@@ -8,7 +8,12 @@ const App = () => {
 
     const fetchMessages = async () => {
         try {
-            const response = await fetch(`http://localhost:5000/messages`);
+            const response = await fetch(`https://bluesky-chat-app-trial-0122e7859a66.herokuapp.com/messages`, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'x-api-key': 'LaHbp3GGJx'
+                },
+            });
             const data = await response.json();
             setMessages(data.reverse());
         } catch (error) {
@@ -23,19 +28,21 @@ const App = () => {
     const handleSendMessage = async (msg) => {
         try {
             if (editingMessage) {
-                await fetch(`http://localhost:5000/messages/${msg.id}`, {
+                await fetch(`https://bluesky-chat-app-trial-0122e7859a66.herokuapp.com/messages/${msg.id}`, {
                     method: 'PUT',
                     headers: {
                         'Content-Type': 'application/json',
+                        'x-api-key': 'LaHbp3GGJx'
                     },
                     body: JSON.stringify(msg),
                 });
                 setEditingMessage(null);
             } else {
-                await fetch(`http://localhost:5000/messages`, {
+                await fetch(`https://bluesky-chat-app-trial-0122e7859a66.herokuapp.com/messages`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
+                        'x-api-key': 'LaHbp3GGJx'
                     },
                     body: JSON.stringify(msg),
                 });
@@ -53,8 +60,11 @@ const App = () => {
     const handleDeleteMessage = async (id) => {
         try {
             console.log('Deleting message with ID:', id);
-            await fetch(`http://localhost:5000/messages/${id}`, {
+            await fetch(`https://bluesky-chat-app-trial-0122e7859a66.herokuapp.com/messages/${id}`, {
                 method: 'DELETE',
+                headers: {
+                    'x-api-key': 'LaHbp3GGJx'
+                },
             });
             fetchMessages();
         } catch (error) {
